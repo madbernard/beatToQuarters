@@ -115,17 +115,24 @@ function drawSomeCards(n, thisDeck) {
 // console.log(drawSomeCards(2, deck));
 
 function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
-  var pcDeck = Object.assign(deck, {'JOKER':true});
-  var gmHand = drawSomeCards(gmDraws + 1, deck);
-  var cardOfFate = gmHand.pop();
-  var pcHand = drawSomeCards(pcDraws, pcDeck);
+  if (pcHelp) {
+    var helpDeck = Object.assign(deck, {'JOKER':true}),
+    helpHand = drawSomeCards(pcHelp, helpDeck);
+  }
+
+  var pcDeck = Object.assign(deck, {'JOKER':true}),
+    gmHand = drawSomeCards(gmDraws + 1, deck),
+    cardOfFate = gmHand.pop(),
+    pcHand = drawSomeCards(pcDraws, pcDeck);
+
+  if (pcHelp) {pcHand = pcHand.concat(helpHand);}
   console.log(cardOfFate, gmHand, pcHand);
 
 
   return true;
 }
 
-doesPCWinTest(3, 3);
+doesPCWinTest(3, 3, 3);
 
 
 
