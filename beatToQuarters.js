@@ -139,18 +139,32 @@ function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
 }
 
 function countSuccesses(handArr, cof) {
-  var successObject = {
-    'perfect': 0,
-    'critical': 0,
-    'ordinary': 0
-  };
+  var successes = {
+      'perfect': 0,
+      'critical': 0,
+      'ordinary': 0
+    },
+    suit = '',
+    rank = '',
+    cofSuit = cof[1],
+    cofRank = cof[0],
+    card = '';
+
   for (var i = 0; i < handArr.length; i++) {
-    if (handArr[i] === cof || handArr[i] === 'JOKER') {successObject.perfect++;}
+    card = handArr[i];
+    if (card === cof || card === 'JOKER') {
+      successes.perfect++;
+      continue;
+    }
+    suit = card[1];
+    rank = card[0];
+    if (suit === cofSuit) {successes.ordinary++;}
+    if (rank === cofRank) {successes.critical++;}
   }
-  return successObject;
+  return successes;
 }
 
-console.log(countSuccesses(['3H','JOKER'],'3H'));
+console.log(countSuccesses(['3H','JOKER','4D','QS'],'3S'));
 
 
 
