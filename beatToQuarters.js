@@ -116,23 +116,45 @@ function drawSomeCards(n, thisDeck) {
 
 function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
   if (pcHelp) {
-    var helpDeck = Object.assign(deck, {'JOKER':true}),
-    helpHand = drawSomeCards(pcHelp, helpDeck);
+    var helpDeck = Object.assign({'JOKER':true}, deck);
+    var helpHand = drawSomeCards(pcHelp, helpDeck);
   }
 
-  var pcDeck = Object.assign(deck, {'JOKER':true}),
-    gmHand = drawSomeCards(gmDraws + 1, deck),
+  var pcDeck = Object.assign({'JOKER':true}, deck),
+    gmDeck = Object.assign({}, deck),
+    gmHand = drawSomeCards(gmDraws + 1, gmDeck),
     cardOfFate = gmHand.pop(),
     pcHand = drawSomeCards(pcDraws, pcDeck);
 
   if (pcHelp) {pcHand = pcHand.concat(helpHand);}
-  console.log(cardOfFate, gmHand, pcHand);
+
+
+  // console.log(cardOfFate, gmHand, pcHand);
+
+  // console.log(helpDeck, pcDeck, deck);
+
 
 
   return true;
 }
 
-doesPCWinTest(3, 3, 3);
+function countSuccesses(handArr, cof) {
+  var successObject = {
+    'perfect': 0,
+    'critical': 0,
+    'ordinary': 0
+  };
+  for (var i = 0; i < handArr.length; i++) {
+    if (handArr[i] === cof || handArr[i] === 'JOKER') {successObject.perfect++;}
+  }
+  return successObject;
+}
+
+console.log(countSuccesses(['3H','JOKER'],'3H'));
+
+
+
+// doesPCWinTest(5, 5, 5);
 
 
 
