@@ -115,6 +115,7 @@ function drawSomeCards(n, thisDeck) {
 // console.log(drawSomeCards(2, deck));
 
 function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
+  // todo: use arguments to run two etc pcs helping this pc
   if (pcHelp) {
     var helpDeck = Object.assign({'JOKER':true}, deck);
     var helpHand = drawSomeCards(pcHelp, helpDeck);
@@ -128,14 +129,21 @@ function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
 
   if (pcHelp) {pcHand = pcHand.concat(helpHand);}
 
+  var gmResults = countSuccesses(gmHand, cardOfFate);
+  var pcResults = countSuccesses(pcHand, cardOfFate);
 
-  // console.log(cardOfFate, gmHand, pcHand);
+  if () return doesPCWinTest(gm); //todo, all 0 = reroll
 
-  // console.log(helpDeck, pcDeck, deck);
-
-
-
-  return true;
+  if (pcResults.perfect !== gmResults.perfect){
+    return pcResults.perfect > gmResults.perfect;
+  }
+  else if (pcResults.critical !== gmResults.critical) {
+    return pcResults.critical > gmResults.critical;
+  }
+  else if (pcResults.ordinary !== gmResults.ordinary) {
+    return pcResults.ordinary > gmResults.ordinary;
+  }
+  else return tiebreaker(gmHand, pcHand); // todo: make this
 }
 
 function countSuccesses(handArr, cof) {
