@@ -181,19 +181,12 @@ function countSuccesses(handArr, cof) {
 }
 
 function tiebreaker(gmHand, pcHand, cofSuit) {
-  var gmRanks = gmHand.filter(correctSuit).map(),
+  var pcRanks = pcHand.filter(function(card){return card[1] === cofSuit;}).map(getRankNumber),
+    pcHighRank = Math.max(...pcRanks),
+    gmRanks = gmHand.filter(function(card){return card[1] === cofSuit;}).map(getRankNumber),
     gmHighRank = Math.max(...gmRanks);
 
-
-  for (var i = 0; i < gmHand.length; i++) {
-    var suit = gmHand[i][1];
-    if (suit === cofSuit) gmHighRank = Math.max(gmHighRank, gmHand[i][0]);
-  }
-  return pcHighRank > gmHighRank;
-}
-
-function correctSuit(card, cofSuit) {
-  return card[1] === cofSuit;
+  return pcHighRank >= gmHighRank;
 }
 
 function getRankNumber(card) {
@@ -205,10 +198,12 @@ function getRankNumber(card) {
 
 
 // console.log(countSuccesses(['3H','JOKER','4D','QS'],'3S'));
-// console.log(doesPCWinTest(5, 5, 2));
 // console.log(correctSuit('3H', 'H'));
 // console.log(correctSuit('3S', 'H'));
-console.log(getRankNumber('3D'));
-console.log(getRankNumber('QD'));
-console.log(getRankNumber('0S'));
+// console.log(getRankNumber('3D'));
+// console.log(getRankNumber('QD'));
+// console.log(getRankNumber('0S'));
+// console.log(tiebreaker(['QD','3S','0D'],['5D','4C','KC','7D'],'D'));
+// console.log(tiebreaker(['QD','3S','0D'],['QD','4C','KC','7D'],'D'));
 
+// console.log(doesPCWinTest(5, 5, 2));
