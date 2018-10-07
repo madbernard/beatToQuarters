@@ -132,7 +132,11 @@ function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
   var gmResults = countSuccesses(gmHand, cardOfFate);
   var pcResults = countSuccesses(pcHand, cardOfFate);
 
-  if () return doesPCWinTest(gm); //todo, all 0 = reroll
+  if (!gmResults.critical &&
+      !gmResults.ordinary &&
+      !pcResults.perfect  &&
+      !pcResults.critical &&
+      !pcResults.ordinary ) return doesPCWinTest(gmDraws, pcDraws, pcHelp);
 
   if (pcResults.perfect !== gmResults.perfect){
     return pcResults.perfect > gmResults.perfect;
@@ -143,7 +147,7 @@ function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
   else if (pcResults.ordinary !== gmResults.ordinary) {
     return pcResults.ordinary > gmResults.ordinary;
   }
-  else return tiebreaker(gmHand, pcHand); // todo: make this
+  else return tiebreaker(gmHand, pcHand, cardOfFate);
 }
 
 function countSuccesses(handArr, cof) {
@@ -172,11 +176,15 @@ function countSuccesses(handArr, cof) {
   return successes;
 }
 
-console.log(countSuccesses(['3H','JOKER','4D','QS'],'3S'));
+function tiebreaker(gmHand, pcHand, cof) {
+  return true; // todo: fix this, guess at "no ordinary, crit tie"
+}
+
+// console.log(countSuccesses(['3H','JOKER','4D','QS'],'3S'));
 
 
 
-// doesPCWinTest(5, 5, 5);
+console.log(doesPCWinTest(5, 5, 2));
 
 
 
