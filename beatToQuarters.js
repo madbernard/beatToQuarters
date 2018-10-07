@@ -22,7 +22,7 @@ if (!jokerUsed) {
 
 // console.log('joker is one in three, top is joker?', jokerUsed);
 
-var cards = ["1H", "1S", "1C", "1D", "2H", "2S", "2C", "2D", "3H", "3S", "3C", "3D", "4H", "4S", "4C", "4D", "5H", "5S", "5C", "5D", "6H", "6S", "6C", "6D", "7H", "7S", "7C", "7D", "8H", "8S", "8C", "8D", "9H", "9S", "9C", "9D", "10H", "10S", "10C", "10D", "JH", "JS", "JC", "JD", "QH", "QS", "QC", "QD", "KH", "KS", "KC", "KD"];
+var cards = ["1H", "1S", "1C", "1D", "2H", "2S", "2C", "2D", "3H", "3S", "3C", "3D", "4H", "4S", "4C", "4D", "5H", "5S", "5C", "5D", "6H", "6S", "6C", "6D", "7H", "7S", "7C", "7D", "8H", "8S", "8C", "8D", "9H", "9S", "9C", "9D", "0H", "0S", "0C", "0D", "JH", "JS", "JC", "JD", "QH", "QS", "QC", "QD", "KH", "KS", "KC", "KD"];
 
 // var deck = {};
 
@@ -66,10 +66,10 @@ var deck = { '1H': true,
   '9S': true,
   '9C': true,
   '9D': true,
-  '10H': true,
-  '10S': true,
-  '10C': true,
-  '10D': true,
+  '0H': true,
+  '0S': true,
+  '0C': true,
+  '0D': true,
   'JH': true,
   'JS': true,
   'JC': true,
@@ -147,7 +147,11 @@ function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
   else if (pcResults.ordinary !== gmResults.ordinary) {
     return pcResults.ordinary > gmResults.ordinary;
   }
-  else return tiebreaker(gmHand, pcHand, cardOfFate);
+  else if (!pcResults.ordinary && !gmResults.ordinary) {
+    // IMO if they tie only on crits, PC should win
+    return true;
+  }
+  else return tiebreaker(gmHand, pcHand, cardOfFate[1]);
 }
 
 function countSuccesses(handArr, cof) {
@@ -176,15 +180,35 @@ function countSuccesses(handArr, cof) {
   return successes;
 }
 
-function tiebreaker(gmHand, pcHand, cof) {
-  return true; // todo: fix this, guess at "no ordinary, crit tie"
+function tiebreaker(gmHand, pcHand, cofSuit) {
+  var gmRanks = gmHand.filter(correctSuit).map(),
+    gmHighRank = Math.max(...gmRanks);
+
+
+  for (var i = 0; i < gmHand.length; i++) {
+    var suit = gmHand[i][1];
+    if (suit === cofSuit) gmHighRank = Math.max(gmHighRank, gmHand[i][0]);
+  }
+  return pcHighRank > gmHighRank;
 }
 
+function correctSuit(card, cofSuit) {
+  return card[1] === cofSuit;
+}
+
+function getRankNumber(card) {
+  var rank = card[0],
+    faceToNumber = {'J': 11, 'Q': 12, 'K': 13, '0': 10};
+  if (faceToNumber[rank]) {rank = faceToNumber[rank];}
+  return parseInt(rank, 10);
+}
+
+
 // console.log(countSuccesses(['3H','JOKER','4D','QS'],'3S'));
-
-
-
-console.log(doesPCWinTest(5, 5, 2));
-
-
+// console.log(doesPCWinTest(5, 5, 2));
+// console.log(correctSuit('3H', 'H'));
+// console.log(correctSuit('3S', 'H'));
+console.log(getRankNumber('3D'));
+console.log(getRankNumber('QD'));
+console.log(getRankNumber('0S'));
 
