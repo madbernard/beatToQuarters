@@ -114,7 +114,7 @@ function drawSomeCards(n, thisDeck) {
 
 // console.log(drawSomeCards(2, deck));
 
-function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
+function doesPCWinTest(gmDraws, pcDraws, pcHelp, unskilled) {
   // todo: use arguments to run two etc pcs helping this pc
   if (pcHelp) {
     var helpDeck = Object.assign({'JOKER':true}, deck);
@@ -131,6 +131,12 @@ function doesPCWinTest(gmDraws, pcDraws, pcHelp) {
 
   var gmResults = countSuccesses(gmHand, cardOfFate);
   var pcResults = countSuccesses(pcHand, cardOfFate);
+
+  if (unskilled) {
+    pcResults.ordinary = pcResults.perfect + pcResults.critical + pcResults.ordinary;
+    pcResults.perfect = 0;
+    pcResults.critical = 0;
+  }
 
   if (!gmResults.critical &&
       !gmResults.ordinary &&
@@ -207,3 +213,32 @@ function getRankNumber(card) {
 // console.log(tiebreaker(['QD','3S','0D'],['QD','4C','KC','7D'],'D'));
 
 // console.log(doesPCWinTest(5, 5, 2));
+
+function createOddsTable(n) {
+  // gm static test for Heroic Effort = 9
+  // scan of NPCs reveals one with a 7 skill
+  // want columns being PC increasing cards
+  // rows being GM increasing cards
+  var headerStart = 'For n = ' + n + ': ';
+
+  var table = [headerStart];
+    // resul = 'GM draws: 3 ';
+  // var row = 'For n = 1000: ';
+  table[0] = table[0] + '| unskilled PC';
+
+  for (var i = 1; i < 10; i++) {
+    resultRow = 'GM draws: ' + i + ' ';
+    var pcWins = 0,
+      counter = n;
+    while (counter) {
+      if (doesPCWinTest(i, 1, 0, true)) {pcWins++;}
+      counter--;
+    }
+    console.log(n, pcWins);
+    resultRow = resultRow + '| ' + Math.floor((pcWins/n)*100) + '%';
+    table.push(resultRow);
+  }
+  console.log(table.join('\n'));
+}
+
+createOddsTable(10000);
