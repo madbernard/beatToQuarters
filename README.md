@@ -46,3 +46,19 @@ GM draws: 6 | 27% | 38% | 47% | 55% | 61% | 67% | 72% | 76%
 GM draws: 7 | 23% | 34% | 42% | 49% | 56% | 63% | 68% | 72%
 GM draws: 8 | 21% | 30% | 38% | 45% | 53% | 60% | 64% | 68%
 GM draws: 9 | 18% | 27% | 34% | 41% | 49% | 56% | 61% | 66%
+
+Odds of PC winning with two help cards from same deck, each number via 10000 tests:
+
+PC draws--> | 1+2 | 2+2 | 3+2 | 4+2 | 5+2 | 6+2 | 7+2 | 8+2
+--- | --- | --- | --- | --- | --- | --- | --- | ---
+GM draws: 1 | 81% | 86% | 90% | 92% | 94% | 95% | 96% | 97%
+GM draws: 2 | 68% | 75% | 81% | 84% | 87% | 90% | 92% | 93%
+GM draws: 3 | 57% | 66% | 72% | 78% | 82% | 86% | 88% | 90%
+GM draws: 4 | 49% | 58% | 66% | 72% | 77% | 82% | 84% | 87%
+GM draws: 5 | 43% | 53% | 60% | 66% | 71% | 77% | 80% | 83%
+GM draws: 6 | 38% | 46% | 55% | 61% | 68% | 72% | 76% | 80%
+GM draws: 7 | 33% | 43% | 50% | 56% | 63% | 68% | 72% | 76%
+GM draws: 8 | 29% | 38% | 44% | 52% | 58% | 64% | 70% | 73%
+GM draws: 9 | 27% | 35% | 42% | 48% | 55% | 60% | 64% | 70%
+
+Hm, I'm not sure I trust my code; I'd expect that other people's cards are more helpful than more of your own cards, because other people might be lending you a perfect success.  That's not how the odds are coming out, though.
