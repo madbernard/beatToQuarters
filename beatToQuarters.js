@@ -219,26 +219,31 @@ function createOddsTable(n) {
   // scan of NPCs reveals one with a 7 skill
   // want columns being PC increasing cards
   // rows being GM increasing cards
-  var headerStart = 'For n = ' + n + ': ';
+  var headerStart = 'Odds of PC winning, over ' + n + ' tests:  ';
+  var columnHeaderStart = 'PC draws--> ';
 
-  var table = [headerStart];
-    // resul = 'GM draws: 3 ';
-  // var row = 'For n = 1000: ';
-  table[0] = table[0] + '| unskilled PC';
+  var table = [headerStart, columnHeaderStart];
 
-  for (var i = 1; i < 10; i++) {
-    resultRow = 'GM draws: ' + i + ' ';
-    var pcWins = 0,
-      counter = n;
-    while (counter) {
-      if (doesPCWinTest(i, 1, 0, true)) {pcWins++;}
-      counter--;
+  for (var gm = 1; gm < 10; gm++) {
+    var resultRow = 'GM draws: ' + gm + ' ';
+
+    for (var pc = 1; pc < 9; pc++) {
+      if (gm === 1) {table[1] = table[1] + '|  ' + pc + '  ';}
+
+      var pcWins = 0,
+        counter = n;
+
+      while (counter) {
+        if (doesPCWinTest(gm, pc, 0)) {pcWins++;}
+        counter--;
+      }
+      var odds = ((pcWins/n)*100).toFixed(0);
+      if (odds.length < 2) {odds = ' ' + odds;}
+      resultRow = resultRow + '| ' + odds + '% ';
     }
-    console.log(n, pcWins);
-    resultRow = resultRow + '| ' + ((pcWins/n)*100).toFixed(0) + '%';
     table.push(resultRow);
   }
-  console.log(table.join('\n'));
+  console.log(table.join('  \n'));
 }
 
 createOddsTable(10000);
