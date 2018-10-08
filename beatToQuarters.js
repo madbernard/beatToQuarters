@@ -219,22 +219,22 @@ function createOddsTable(n) {
   // scan of NPCs reveals one with a 7 skill
   // want columns being PC increasing cards
   // rows being GM increasing cards
-  var headerStart = 'Odds of PC winning, over ' + n + ' tests:  ';
+  var headerStart = 'Odds of PC winning with two help cards from same deck, each number via ' + n + ' tests:  \n  ';
   var columnHeaderStart = 'PC draws--> ';
-
-  var table = [headerStart, columnHeaderStart];
+  var markdownTableIndicator = '--- | --- | --- | --- | --- | --- | --- | --- | ---  '
+  var table = [headerStart, columnHeaderStart, markdownTableIndicator];
 
   for (var gm = 1; gm < 10; gm++) {
     var resultRow = 'GM draws: ' + gm + ' ';
 
     for (var pc = 1; pc < 9; pc++) {
-      if (gm === 1) {table[1] = table[1] + '|  ' + pc + '  ';}
+      if (gm === 1) {table[1] = table[1] + '| ' + pc + '+2 ';}
 
       var pcWins = 0,
         counter = n;
 
       while (counter) {
-        if (doesPCWinTest(gm, pc, 0)) {pcWins++;}
+        if (doesPCWinTest(gm, pc, 2)) {pcWins++;}
         counter--;
       }
       var odds = ((pcWins/n)*100).toFixed(0);
