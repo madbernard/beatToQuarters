@@ -18,6 +18,7 @@ This seems slightly variable, but not more than 1% (just eyeballing run vs run)
 
 Odds of PC winning, over 10000 tests:  
 PC draws--> |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  
+--- | --- | --- | --- | --- | --- | --- | --- | --- |
 GM draws: 1 | 54% | 72% | 80% | 86% | 90% | 93% | 93% | 96%  
 GM draws: 2 | 37% | 56% | 67% | 75% | 81% | 85% | 88% | 91%  
 GM draws: 3 | 28% | 45% | 56% | 66% | 73% | 79% | 82% | 86%  
@@ -29,3 +30,15 @@ GM draws: 8 | 11% | 21% | 30% | 38% | 46% | 53% | 60% | 65%
 GM draws: 9 |  9% | 19% | 27% | 35% | 42% | 48% | 55% | 61%  
 
 The above is just with one PC deck in play.
+
+Odds of PC winning with one help card, each number from 10000 tests:
+PC draws--> | 1+1 | 2+1 | 3+1 | 4+1 | 5+1 | 6+1 | 7+1 | 8+1
+GM draws: 1 | 71% | 81% | 86% | 90% | 92% | 93% | 95% | 96%
+GM draws: 2 | 56% | 68% | 75% | 80% | 85% | 88% | 90% | 92%
+GM draws: 3 | 45% | 57% | 66% | 73% | 78% | 82% | 85% | 89%
+GM draws: 4 | 37% | 49% | 58% | 66% | 73% | 77% | 81% | 84%
+GM draws: 5 | 32% | 43% | 52% | 59% | 66% | 72% | 76% | 81%
+GM draws: 6 | 27% | 38% | 47% | 55% | 61% | 67% | 72% | 76%
+GM draws: 7 | 23% | 34% | 42% | 49% | 56% | 63% | 68% | 72%
+GM draws: 8 | 21% | 30% | 38% | 45% | 53% | 60% | 64% | 68%
+GM draws: 9 | 18% | 27% | 34% | 41% | 49% | 56% | 61% | 66%
