@@ -15,3 +15,17 @@ GM draws: 8 | 4%
 GM draws: 9 | 3%  
   
 This seems slightly variable, but not more than 1% (just eyeballing run vs run)
+
+Odds of PC winning, over 10000 tests:  
+PC draws--> |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  
+GM draws: 1 | 54% | 72% | 80% | 86% | 90% | 93% | 93% | 96%  
+GM draws: 2 | 37% | 56% | 67% | 75% | 81% | 85% | 88% | 91%  
+GM draws: 3 | 28% | 45% | 56% | 66% | 73% | 79% | 82% | 86%  
+GM draws: 4 | 22% | 38% | 50% | 59% | 66% | 72% | 77% | 82%  
+GM draws: 5 | 17% | 31% | 43% | 52% | 60% | 67% | 73% | 77%  
+GM draws: 6 | 15% | 27% | 38% | 47% | 55% | 62% | 67% | 73%  
+GM draws: 7 | 12% | 24% | 34% | 42% | 50% | 56% | 63% | 69%  
+GM draws: 8 | 11% | 21% | 30% | 38% | 46% | 53% | 60% | 65%  
+GM draws: 9 |  9% | 19% | 27% | 35% | 42% | 48% | 55% | 61%  
+
+The above is just with one PC deck in play.
