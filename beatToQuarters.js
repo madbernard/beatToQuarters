@@ -235,7 +235,7 @@ function createOddsTable(n) {
       counter--;
     }
     console.log(n, pcWins);
-    resultRow = resultRow + '| ' + Math.floor((pcWins/n)*100) + '%';
+    resultRow = resultRow + '| ' + ((pcWins/n)*100).toFixed(0) + '%';
     table.push(resultRow);
   }
   console.log(table.join('\n'));
