@@ -100,19 +100,25 @@ function getRandomInt(max) {
 function drawSomeCards(n, thisDeck) {
   var cards = Object.keys(thisDeck),
     hand = [],
-    drawn;
+    drawn = {},
+    thisCard;
+
   while (n) {
-    drawn = cards[getRandomInt(cards.length)];
-    if (thisDeck[drawn]) {
-      hand.push(drawn);
-      delete thisDeck[drawn];
+    thisCard = cards[getRandomInt(cards.length)];
+
+    if (thisCard in drawn) {
+      continue;
+    }
+    else {
+      hand.push(thisCard);
+      drawn[thisCard] = true;
       n--;
     }
   }
   return hand;
 }
 
-// console.log(drawSomeCards(2, deck));
+// console.log(drawSomeCards(50, deck));
 
 function doesPCWinTest(gmDraws, pcDraws, pcHelp, unskilled) {
   // todo: use arguments to run two etc pcs helping this pc
